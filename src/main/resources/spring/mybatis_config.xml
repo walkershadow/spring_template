@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <plugins>
+        <!-- mybatis分页插件 -->
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--<property name="dialect" value="mysql"/>-->
+            <!--分页合理化参数 pageNumber小于0时为0，大于最大页数时为最大页数 -->
+            <property name="reasonable" value="true"/>
+            <!--支持查询全部数据 当pageSize为0时 -->
+            <property name="pageSizeZero" value="true"/>
+        </plugin>
+    </plugins>
+</configuration>

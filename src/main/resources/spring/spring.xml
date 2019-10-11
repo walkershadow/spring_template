@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd">
+
+    <!-- 引入kafka消费者 -->
+    <!--<import resource="classpath*:/spring/spring_kafka_consumer.xml" />-->
+    <!-- 引入kafka生产者 -->
+    <import resource="classpath*:/spring/spring_kafka_producer.xml" />
+    <!-- 引入mybatis -->
+    <!--<import resource="classpath*:/spring/spring_mybatis.xml" />-->
+    <!-- 引入多数据源mybatis 支持单库事务 com.dao.mapper接口需要注解@Datasource-->
+    <import resource="classpath*:/spring/spring_muti_mybatis.xml" />
+    <!-- 引入多数据源mybatis 支持跨库事务 com.dao.mapper不接口需要注解@Datasource-->
+    <!--<import resource="classpath*:/spring/spring_muti_mybatis_jta.xml" />-->
+    <!-- 引入属性文件 -->
+    <!--<import resource="classpath*:/spring/spring_properties.xml" />-->
+
+    <!-- 启用定时器 注解 -->
+    <task:annotation-driven/>
+    <!-- 开启aop注解方式 -->
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+    <!-- 启用扫描注解 -->
+    <context:annotation-config />
+    <!-- 扫描除controller外的所有注解 controller注解交由mvc扫描-->
+    <context:component-scan base-package="com" >
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 从spring容器获取bean的工具类 -->
+    <bean class="com.core.utils.ApplicationContextUtils"/>
+
+</beans>
